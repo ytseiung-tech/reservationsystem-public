@@ -25,10 +25,11 @@
    - 可部署至 GitHub Pages、Vercel、Netlify 等平台
 
 ## 📂 檔案結構
-
+```
 預約平台/
 ├── index.html # 主頁 HTML
 └── README.md # 專案說明
+```
 
 ## 🛡️ 注意事項
 
