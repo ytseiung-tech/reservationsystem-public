@@ -1,0 +1,156 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>預約平台</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background-color: #f2f4f8;
+      padding: 30px 10px;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+    }
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      margin-bottom: 25px;
+    }
+    .card h2, .card h3 {
+      margin-top: 0;
+      color: #2c3e50;
+    }
+    .card ul {
+      padding-left: 20px;
+    }
+    label {
+      margin-top: 15px;
+      display: block;
+      font-weight: bold;
+      color: #34495e;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-top: 5px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    textarea {
+      resize: vertical;
+      height: 80px;
+    }
+    button {
+      margin-top: 25px;
+      background-color: #1abc9c;
+      color: white;
+      border: none;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background-color: #16a085;
+    }
+    .img-preview {
+      width: 100%;
+      border-radius: 12px;
+      margin-top: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- 📌 說明 -->
+  <div class="card">
+    <h2>📌 收費方式</h2>
+    <ul>
+      <li>每次收費 <strong>200 元</strong></li>
+    </ul>
+
+    <h3>🎨 範例</h3>
+    <p>以下是歷年作品參考：</p>
+    <img src="https://i.imgur.com/BqZ5QJc.jpg" alt="範例圖片" class="img-preview" />
+  </div>
+
+  <!-- 📝 預約表單卡片 -->
+  <div class="card">
+    <h2>📝 預約表單</h2>
+    <form id="bookingForm">
+      <label>名稱</label>
+      <input type="text" name="club" required />
+
+      <label>預約日期</label>
+      <input type="date" name="reserve_date" required />
+
+      <label>繳交日期</label>
+      <input type="date" name="submit_date" required />
+
+      <label>內容</label>
+      <textarea name="content" required placeholder="例如：本次主題是招生或比賽宣傳..."></textarea>
+
+      <label>聯絡人</label>
+      <input type="text" name="name" required />
+
+      <label>IG 帳號</label>
+      <input type="text" name="ig" placeholder="@yourclub" required />
+
+      <label>Email</label>
+      <input type="email" name="email" placeholder="you@example.com" required />
+
+      <label>備註</label>
+      <textarea name="note" placeholder="其他需求..."></textarea>
+
+      <div style="margin-top: 25px; display: flex; align-items: center;">
+        <input type="checkbox" id="agree" required style="margin-right: 8px;" />
+        <label for="agree" style="margin: 0; font-size: 15px;">
+          我已閱讀並確認遵守以上收費方式與預約規定。
+        </label>
+      </div>
+
+      <button type="submit">📬 送出預約</button>
+    </form>
+  </div>
+
+</div>
+
+<!-- 📤 表單提交 JavaScript（已隱藏連結） -->
+<script>
+  const scriptURL = 'https://your-google-script-url'; // ← 請自行替換為正式網址
+
+  document.getElementById('bookingForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData.entries());
+
+    fetch(scriptURL, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.text())
+      .then((response) => {
+        alert('✅ 預約成功！感謝填寫');
+        document.getElementById('bookingForm').reset();
+      })
+      .catch((error) => alert('❌ 發生錯誤：' + error));
+  });
+</script>
+
+</body>
+</html>
